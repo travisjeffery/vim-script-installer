@@ -4,10 +4,12 @@ require 'rake'
 require 'find'
 require 'pathname'
 
+IGNORE = [/\.git/, /^\.\.$/, /^\.$/, /Rakefile$/]
+
 files = []
 
 Find.find(Dir.new(File.dirname(__FILE__)).path) do |path|
-  if !path.match(/\.git/) && path != '.' && path != '..' && !path.match(/Rakefile/) && !File.directory?(path)
+  unless IGNORE.any? { |re| path.match(re) } || File.directory?(path)
     files << Pathname.new(path).relative_path_from(Pathname.new(File.dirname(__FILE__))).to_s
   end
 end
