@@ -7,7 +7,7 @@ require 'pathname'
 files = []
 
 Find.find(Dir.new(File.dirname(__FILE__)).path) do |path|
-  if !path.match(/\.git/) && path != '.' && path != '..' && !File.directory?(path)
+  if !path.match(/\.git/) && path != '.' && path != '..' && path != 'Rakefile' && !File.directory?(path)
     files << Pathname.new(path).relative_path_from(Pathname.new(File.dirname(__FILE__))).to_s
   end
 end
