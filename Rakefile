@@ -4,7 +4,7 @@ require 'rake'
 require 'find'
 require 'pathname'
 
-IGNORE = [/\.git/, /^\.\.$/, /^\.$/, /Rakefile$/]
+IGNORE = [/\.git/, /^\.\.$/, /^\.$/, /Rakefile$/, /~$/, /\.swp$/]
 
 files = []
 
