@@ -1,4 +1,5 @@
-# written by travis jeffery <github:travisjeffery>
+# written by travis jeffery <travisjeffery@gmail.com>
+# contributions by scrooloose <github:scrooloose>
 
 require 'rake'
 require 'find'
