@@ -15,6 +15,20 @@ Find.find(Dir.new(File.dirname(__FILE__)).path) do |path|
   end
 end
 
+desc 'Zip up the project files'
+task :zip do
+  zip_name = File.basename(File.dirname(__FILE__))
+  zip_name.gsub!(/ /, '_')
+  zip_name = "#{zip_name}.zip"
+
+  if File.exist?(zip_name)
+    abort("Zip file #{zip_name} already exists. Remove it first.")
+  end
+
+  puts "Creating zip file: #{zip_name}"
+  system("zip #{zip_name} #{files.join(" ")}")
+end
+
 desc 'Install plugin and documentation'
 task :install do
   vimfiles = if ENV['VIMFILES']
