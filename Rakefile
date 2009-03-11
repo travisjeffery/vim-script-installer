@@ -33,3 +33,16 @@ task :install do
   end
 
 end
+
+desc 'Pulls from origin'
+task :pull do
+  puts "Updating local repo..."
+  system("cd " << Dir.new(File.dirname(__FILE__)).path << " && git pull")
+end
+
+desc 'Calls pull task and then install task'
+task :update => ['pull', 'install'] do
+  puts "Update of vim script complete."
+end
+
+task :default => ['update']
