@@ -44,3 +44,5 @@ desc 'Calls pull task and then install task'
 task :update => ['pull', 'install'] do
   puts "Update of vim script complete."
 end
+
+task :default => ['update']
