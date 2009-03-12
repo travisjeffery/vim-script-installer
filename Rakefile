@@ -7,13 +7,8 @@ require 'pathname'
 
 IGNORE = [/\.git/, /^\.\.$/, /^\.$/, /Rakefile$/, /~$/, /\.swp$/, /\.zip$/, /tags$/]
 
-files = []
-
-Find.find(Dir.new(File.dirname(__FILE__)).path) do |path|
-  unless IGNORE.any? { |re| path.match(re) } || File.directory?(path)
-    files << Pathname.new(path).relative_path_from(Pathname.new(File.dirname(__FILE__))).to_s
-  end
-end
+files = `git ls-files`.split("\n")
+files.reject! { |f| IGNORE.any? { |re| f.match(re) } }
 
 desc 'Zip up the project files'
 task :zip do
