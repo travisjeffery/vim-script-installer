@@ -54,4 +54,22 @@ task :update => ['pull', 'install'] do
   puts "Update of vim script complete."
 end
 
+desc 'Uninstall plugin and documentation'
+task :uninstall do
+  vimfiles = if ENV['VIMFILES']
+               ENV['VIMFILES']
+             elsif RUBY_PLATFORM =~ /(win|w)32$/
+               File.expand_path("~/vimfiles")
+             else
+               File.expand_path("~/.vim")
+             end
+  files.each do |file|
+    target_file = File.join(vimfiles, file)
+    FileUtils.rm target_file
+
+    puts "Uninstalled #{target_file}"
+  end
+
+end
+
 task :default => ['update']
